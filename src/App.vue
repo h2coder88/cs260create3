@@ -1,32 +1,108 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+<div id="app">
+  <div id="menu">
+    <div id="brand">
+      <router-link to="/">
+        <h1>NCAA Football Top 10</h1>
+      </router-link>
     </div>
-    <router-view />
+    <div id="side">
+      <router-link to="/compare">
+        <div class="menu-item browse">
+          <p>Compare ({{compareSize}} Teams Selected)</p>
+        </div>
+      </router-link>
+      <router-link to="/details">
+        <div class="menu-item">
+          <p>View Details (Selected: {{detailsName}})</p>
+        </div>
+      </router-link>
+    </div>
   </div>
+  <router-view />
+</div>
 </template>
 
+<script>
+export default {
+name: 'App',
+computed: {
+    compareSize() {
+      return this.$root.$data.compareList.length;
+    },
+    detailsName() {
+    return this.$root.$data.selected.name;
+    }
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 50px 100px;
+
+}
+
+#menu {
+  margin-bottom: 50px;
+}
+
+#menu a {
+  color: #B84901;
+}
+
+#brand {
+  display: flex;
+  justify-content: center;
+  font-size: 200%;
+}
+
+#side {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.menu-item {
+  display: flex;
+  width: 400px;
+  background: #5e748a;
+  height: 50px;
   text-align: center;
-  color: #2c3e50;
+  font-size: 150%;
+
 }
 
-#nav {
-  padding: 30px;
+.menu-item p {
+  margin: auto;
+  color: black;
+  font-family: impact, fantasy;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.browse {
+  margin-right: 50px;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+h1 {
+  text-align: center;
+  color: black;
+  font-family: impact, fantasy;
+}
+
+@media only screen and (max-width: 800px) {
+  #brand {
+    font-size: 100%;
+  }
+
+  .menu-item {
+    width: 100%;
+    margin: 10px;
+    background: black;
+    height: 50px;
+  }
 }
 </style>

@@ -1,23 +1,29 @@
 <template>
 <div>
-  <TeamList :teams="teams" />
+  <div v-if='this.$root.$data.compareList.length > 0' class="wrapper">
+  </div>
+  <div v-else class="emptyCart">
+    <h1>No Teams Selected!</h1>
+  </div>
+  <CompareList :teamList="teams" />
 </div>
 </template>
 
 <script>
-import TeamList from "../components/TeamList.vue"
+import CompareList from "../components/CompareList.vue"
 export default {
-  name: 'Home',
+  name: 'Compare',
   components: {
-    TeamList
+    CompareList
   },
   data() {
     return {
+      searchText: '',
     }
   },
   computed: {
     teams() {
-      return this.$root.$data.teams;
+      return this.$root.$data.compareList.filter(team => team.name.toLowerCase().search(this.searchText) >= 0);
     }
   },
 }
@@ -54,5 +60,13 @@ input {
   box-shadow: none !important;
   width: 100%;
   height: 40px;
+}
+
+.emptyCart {
+  width: 100%;
+  font-size: 150%;
+  text-align: center;
+  color: orange;
+  margin-top: 100px;
 }
 </style>
