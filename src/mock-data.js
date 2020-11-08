@@ -23,7 +23,7 @@ let mock = [{
     rank: 4,
     name: "Notre Dame",
     location: "South Bend, Indiana",
-    country: "6-0",
+    record: "6-0",
     image: 'notredame.png'
   },
   {
